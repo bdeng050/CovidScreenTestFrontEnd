@@ -1,0 +1,60 @@
+<h2>Admin Page</h2>
+<div>
+<ul class="persons">
+    <li *ngFor="let person of persons">
+        <span class="badge">{{person.userName}}</span>
+        <span class="badge">{{person.id}}</span>
+        <span *ngIf="!person.hasCovid" class="badge">this person has no covid</span>
+    </li>
+</ul>
+</div>
+<button (click)="onClickMe()">Update</button>
+<mat-card>
+    <mat-card-content>
+      <form *ngIf="ifupdate" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  
+        
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Old ID" formControlName="oldId" required>
+         
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="NewUserName" formControlName="newUsername" required>
+          
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input matInput placeholder="newPassWord" formControlName="newPassWord" required>
+            
+          </mat-form-field>
+        <button mat-raised-button color="primary">UPDATE</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+<!-- <form *ngIf="ifupdate" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+    <div>
+      <label for="oldId">
+        oldID
+      </label>
+      <input id="oldId" type="number" formControlName="oldId">
+    </div>
+  
+    <div>
+      <label for="newUsername">
+        newUsername
+      </label>
+      <input id="newUsername" type="text" formControlName="newUsername">
+    </div>
+
+    <div>
+        <label for="newPassWord">
+            newPassWord
+        </label>
+        <input id="newPassWord" type="text" formControlName="newPassWord">
+      </div>
+  
+      <button mat-raised-button color="primary">UPDATE</button>
+  
+  </form> -->
+
+
