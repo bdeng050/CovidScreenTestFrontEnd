@@ -14,7 +14,7 @@ export class LoginService{
   private updateCovidURL: string='http://123.0.0.1:8081/updateCovid'
   private updateCovid2URL: string='http://123.0.0.1:8081/updateCovid2'
   private openURL: string= 'https://opendata.arcgis.com/datasets/6bfe7832017546e5b30c5cc6a201091b_0/FeatureServer/0/query?where=1%3D1&outFields=Date,Total_Active_Cases_by_Date&outSR=4326&f=json'
-
+  private findPersonByUsername : string='http://127.0.0.1:8081/pass'
   constructor(private http: HttpClient) {}
 
   public loginCheck(user:User): Observable<any>{
@@ -59,5 +59,8 @@ export class LoginService{
   }
   public getCase():Observable<any>{
     return this.http.get(this.openURL);
+  }
+  public findPersonByUserName(name:string):Observable<any>{
+    return this.http.get('http://123.0.0.1:8081/pass/${name}')
   }
 }

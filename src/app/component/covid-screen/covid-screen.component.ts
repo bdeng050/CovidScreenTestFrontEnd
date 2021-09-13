@@ -30,7 +30,7 @@ export class CovidScreenComponent implements OnInit {
     this.userName="";
     this.loginService = loginService
     this.covidForm = this.fb.group({
-      id: ['',Validators.required],
+      name: ['',Validators.required],
       fever: ['',Validators.required],
       cough: ['',Validators.required],
     })
@@ -44,10 +44,12 @@ export class CovidScreenComponent implements OnInit {
 
   }
    onSubmit(): void {
-    try{const id= this.covidForm.get('id')?.value;
-     this.loginService.getAllPerson().subscribe(Person=> {
+    try{
+      const name= this.covidForm.get('name')?.value;
+      this.loginService.getAllPerson().subscribe(Person=> {
       for(let i of Person){
-        if(i.id==id){
+        console.log(i)
+        if(i.userName == name){
           const fever= this.covidForm.get('fever')?.value;
           const cough= this.covidForm.get('cough')?.value;
           this.persons[0]=i;
@@ -57,9 +59,6 @@ export class CovidScreenComponent implements OnInit {
           console.log(i.passWord);
           this.loginService.registration(new User(i.userName, i.passWord,true)).subscribe(result=>{console.log(result);});
           this.router.navigate(['dont/'])
-          // if(fever==1){
-          //   this.openDialog();
-          // }
         }
       }
     });
