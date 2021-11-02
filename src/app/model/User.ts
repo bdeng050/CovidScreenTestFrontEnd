@@ -5,16 +5,18 @@ export class User{
   //   this.userName=username;
   //   this.passWord=password
   // }
-  constructor( username: any, password: any, hasCovid:boolean) {
+  constructor( username: any, password: any, hasCovid:boolean, info:boolean) {
     this.userName=username;
     this.passWord=password
     this.hasCovid=hasCovid
+    this.info=info
   }
 
   id: number | undefined
   userName: string
   passWord: string
   hasCovid: boolean
+  info: boolean
 
   // public getID():number{
   //   return this.id;

@@ -40,12 +40,19 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CheckboxComponent } from './component/checkbox/checkbox.component';
 import { LoginComponent } from './component/login/login.component';
-import {CommonModule} from "@angular/common";
+import {CommonModule, registerLocaleData} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { CovidScreenComponent } from './component/covid-screen/covid-screen.component';
 import { DontComeToWorkComponent } from './component/dont-come-to-work/dont-come-to-work.component';
+// import { NZ_I18N } from 'ng-zorro-antd/i18n';
+// import { en_US } from 'ng-zorro-antd/i18n';
+import en from '@angular/common/locales/en';
+import { ProfileComponent } from './component/profile/profile.component';
+
+
+registerLocaleData(en);
 
 
 
@@ -58,7 +65,9 @@ import { DontComeToWorkComponent } from './component/dont-come-to-work/dont-come
     RegisterComponent,
     AdminComponent,
     CovidScreenComponent,
-    DontComeToWorkComponent
+    DontComeToWorkComponent,
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -106,7 +115,7 @@ import { DontComeToWorkComponent } from './component/dont-come-to-work/dont-come
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  // providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

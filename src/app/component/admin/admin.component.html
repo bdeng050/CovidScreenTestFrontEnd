@@ -8,6 +8,8 @@
         <span class="badge"><pre></pre></span>
         <span *ngIf="!person.hasCovid" class="badge">this person has no covid</span>
         <span class="badge"><pre></pre></span>
+        <span class="badge">{{person.info}}</span>
+        <span class="badge"><pre></pre></span>
     </li>
 </ul>
 </div>
@@ -30,6 +32,14 @@
             
           </mat-form-field>
         <button mat-raised-button color="primary">UPDATE</button>
+      </form>
+    </mat-card-content>
+    <mat-card-content>
+      <form *ngIf="ifupdate">
+        <mat-form-field class="full-width-input">
+          <input matInput placeholder="Old ID" formControlName="oldId" required>
+         
+        </mat-form-field>
       </form>
     </mat-card-content>
   </mat-card>

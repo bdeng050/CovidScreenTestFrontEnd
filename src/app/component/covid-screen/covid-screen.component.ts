@@ -6,6 +6,7 @@ import {covidData} from "../../model/covidData" ;
 import { LoginService } from '../../service/loginService';
 import {Router} from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
+import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 
 
 // import { features } from 'process';
@@ -19,16 +20,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./covid-screen.component.css']
 })
 export class CovidScreenComponent implements OnInit {
+  labelPosition: 'before' | 'after' = 'after';
   data: covidData[]=[];
   persons: User[]=[];
   covidForm: FormGroup;
   loginService: LoginService;
   hasCovid= false;
   userName: string;
+  token:string
   constructor(private fb: FormBuilder, loginService: LoginService, private router: Router,private activateInfo: ActivatedRoute) {
     //this.person=person;
     this.userName="";
-    this.loginService = loginService
+    this.loginService = loginService;
+    this.token=''
     this.covidForm = this.fb.group({
       name: ['',Validators.required],
       fever: ['',Validators.required],
@@ -36,29 +40,46 @@ export class CovidScreenComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+    this.token = JSON.parse(localStorage.getItem('loginInfo') || '{}')
+    console.log('loginToken',this.token)
+    if(this.token!=='true'){
+      console.log('fail')
+      // this.router.navigate(['dont/'])
+    }
     this.activateInfo.queryParams.subscribe(params =>{  
       this.userName=params.name 
      }) 
+     this.loginService.getAllPerson().subscribe(result=>{console.log(result)})
    console.log(this.userName);
    this.loginService.getCase().subscribe(result=>{this.data=result.features; console.log(this.data[this.data.length-1])});
 
   }
+  formVerify(result1:any, result2:any):boolean {
+    if(result1=='yes'&& result2=='yes'){
+      return true
+    }
+    return false
+  }
    onSubmit(): void {
     try{
+      console.log(this.labelPosition)
       const name= this.covidForm.get('name')?.value;
       this.loginService.getAllPerson().subscribe(Person=> {
       for(let i of Person){
-        console.log(i)
+        // console.log(i)
         if(i.userName == name){
           const fever= this.covidForm.get('fever')?.value;
           const cough= this.covidForm.get('cough')?.value;
-          this.persons[0]=i;
-          console.log(this.persons[0]);
+          if(this.formVerify(fever,cough)){
           this.loginService.deletePerson(i.id).subscribe(result=>{console.log(result);});
           console.log(i.userName);
           console.log(i.passWord);
-          this.loginService.registration(new User(i.userName, i.passWord,true)).subscribe(result=>{console.log(result);});
+          this.loginService.registration(new User(i.userName, i.passWord,true,true)).subscribe(result=>{console.log(result);});
           this.router.navigate(['dont/'])
+          }
+          else{
+            this.router.navigate(['profile/'])
+          }
         }
       }
     });
@@ -67,26 +88,8 @@ export class CovidScreenComponent implements OnInit {
     console.log(e);
   }
   }
-
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-  //     width: '250px',
-  //     data: {pperson: this.persons[0]}
-      
-  //   }); 
-  // }
-
 }
 
-// @Component({
-//   selector: 'dialog-overview-example-dialog',
-//   templateUrl: 'dialog-overview-example-dialog.html',
-// })
-// export class DialogOverviewExampleDialog {
 
-//   constructor(
-//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-// }
 
 

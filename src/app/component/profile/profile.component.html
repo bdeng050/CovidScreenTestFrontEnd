@@ -1,0 +1,17 @@
+
+<button mat-button [matMenuTriggerFor]="aboveMenu">Your Id</button>
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button mat-menu-item>{{this.id}}</button> 
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="belowMenu">Your Username</button>
+<mat-menu #belowMenu="matMenu" yPosition="below">
+  <button mat-menu-item>{{this.user}}</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="beforeMenu">Your Status</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+  <button mat-menu-item>{{this.infoData}}</button>
+</mat-menu>
+
+

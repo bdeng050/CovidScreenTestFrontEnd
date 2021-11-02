@@ -33,7 +33,8 @@ export class RegisterComponent {
         const username = this.loginForm.get('username')?.value;
         const password = this.loginForm.get('password')?.value;
         const hasCovid= false;
-        await this.loginService.registration(new User(username, password,hasCovid)).subscribe(Regis=> {
+        const info= false
+        await this.loginService.registration(new User(username, password,hasCovid,info)).subscribe(Regis=> {
           if (Regis === true) {
             this.loginInvalid = true;
             //this.router.navigate(['login/'])// TODO: add redirect form after.

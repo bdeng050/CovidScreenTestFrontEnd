@@ -42,7 +42,7 @@ export class AdminComponent implements OnInit {
     const newU = this.updateForm.get('newUsername')?.value;
     const newP = this.updateForm.get('newPassWord')?.value;
     this.loginService.deletePerson(old).subscribe(result=>{console.log(result);});
-    this.loginService.registration(new User(newU,newP,false)).subscribe(result=>{console.log(result);});
+    this.loginService.registration(new User(newU,newP,false,false)).subscribe(result=>{console.log(result);});
     
     }
     catch (e) {

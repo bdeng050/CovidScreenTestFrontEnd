@@ -7,6 +7,7 @@ import { CovidScreenComponent } from './component/covid-screen/covid-screen.comp
 import { DontComeToWorkComponent } from './component/dont-come-to-work/dont-come-to-work.component';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 const routes: Routes = [
   //{ path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'admin', component: AdminComponent},
   { path: 'covid', component: CovidScreenComponent},
-  {path: 'dont', component: DontComeToWorkComponent}
+  {path: 'dont', component: DontComeToWorkComponent},
+  {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({
