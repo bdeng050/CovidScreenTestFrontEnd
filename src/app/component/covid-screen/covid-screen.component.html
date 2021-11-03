@@ -1,21 +1,52 @@
 <h2>Hi,{{userName}}, Please complete the form!</h2>
-<mat-card>
-    <mat-card-content>
-      <form [formGroup]="covidForm" (ngSubmit)="onSubmit()">   
+<!-- <mat-card>
+    <mat-card-content> -->
+      <form [formGroup]="covidForm">   
         <mat-form-field class="full-width-input">
           <input matInput placeholder="Your Name" formControlName="name" required>
         </mat-form-field>
         <br>
-        <mat-form-field class="full-width-input">
+        <!-- <mat-form-field class="full-width-input">
           <input matInput placeholder="Fever?" formControlName="fever" required> 
         </mat-form-field>
         <br>
         <mat-form-field class="full-width-input">
             <input matInput placeholder="cough？" formControlName="cough" required> 
-          </mat-form-field>
-          <br>
-        <button mat-raised-button color="primary">Submit Your Status</button>
+          </mat-form-field> -->
+        <!-- <button mat-raised-button color="primary">Submit Your Status</button> -->
       </form>
-    </mat-card-content>
-  </mat-card>
+    <!-- </mat-card-content> 
+  </mat-card> -->
+  <section class="example-section">
+    <label class="example-margin">Cough:</label>
+    <mat-radio-group [(ngModel)]="cough">
+      <mat-radio-button class="example-margin" value="no">
+        slight
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="medium">
+        medium
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="yes">
+        severe
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
+  <section class="example-section">
+    <label class="example-margin">Fever:</label>
+    <mat-radio-group [(ngModel)]="fever">
+      <mat-radio-button class="example-margin" value="no">
+        slight
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="medium">
+        medium
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="yes">
+        severe
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
+  <button (click)="onSubmit()"mat-raised-button color="primary">Submit Your Status</button>
+  <h2>{{this.cough}}</h2>
+
+
 

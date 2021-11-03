@@ -58,7 +58,10 @@ export class LoginComponent {
         await this.loginService.getAllPerson().subscribe(persons=>{
           for(let i of persons){
             if(i.userName==username){
-              console.log("icovid",i.hasCovid)
+              console.log(i)
+              if(i.info){
+                this.router.navigate(['profile/'])
+              }
               if(i.hasCovid){
                 this.router.navigate(['dont/'])
               }
