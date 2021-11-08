@@ -1,15 +1,20 @@
 
-<button mat-button [matMenuTriggerFor]="aboveMenu">Your Id</button>
+<button mat-button [matMenuTriggerFor]="aboveMenu">Your Id :</button>
+<button mat-button [matMenuTriggerFor]="aboveMenu">{{this.id}}</button>
 <mat-menu #aboveMenu="matMenu" yPosition="above">
   <button mat-menu-item>{{this.id}}</button> 
 </mat-menu>
+<br>
 
-<button mat-button [matMenuTriggerFor]="belowMenu">Your Username</button>
+<button mat-button [matMenuTriggerFor]="belowMenu">Your Username :</button>
+<button mat-button [matMenuTriggerFor]="belowMenu">{{this.user}}</button>
 <mat-menu #belowMenu="matMenu" yPosition="below">
   <button mat-menu-item>{{this.user}}</button>
 </mat-menu>
+<br>
 
-<button mat-button [matMenuTriggerFor]="beforeMenu">Your Status</button>
+<button mat-button [matMenuTriggerFor]="beforeMenu">Your Status :</button>
+<button mat-button [matMenuTriggerFor]="beforeMenu">{{this.infoData}}</button>
 <mat-menu #beforeMenu="matMenu" xPosition="before">
   <button mat-menu-item>{{this.infoData}}</button>
 </mat-menu>

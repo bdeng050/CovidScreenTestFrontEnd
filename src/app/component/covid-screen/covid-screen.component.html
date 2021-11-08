@@ -1,4 +1,4 @@
-<h2>Hi,{{userName}}, Please complete the form!</h2>
+<h2>Hi,{{this.userName}}, Please complete the form!</h2>
 <!-- <mat-card>
     <mat-card-content> -->
       <form [formGroup]="covidForm">   
@@ -45,8 +45,22 @@
       </mat-radio-button>
     </mat-radio-group>
   </section>
+  <section class="example-section">
+    <label class="example-margin">Loss of taste or smell:</label>
+    <mat-radio-group [(ngModel)]="other">
+      <mat-radio-button class="example-margin" value="no">
+        slight
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="medium">
+        medium
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="yes">
+        completely Lost
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
   <button (click)="onSubmit()"mat-raised-button color="primary">Submit Your Status</button>
-  <h2>{{this.cough}}</h2>
+  <!-- <h2>{{this.cough}}</h2> -->
 
 
 

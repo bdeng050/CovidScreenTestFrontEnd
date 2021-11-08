@@ -18,8 +18,8 @@
           </mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary">Login</button>
-        <button onClick="onlogout()" mat-raised-button color="primary">LogOut</button>
       </form>
+      <button (click)="onlogout()" mat-raised-button color="primary">LogOut</button>
     </mat-card-content>
     <h3>Welcome, {{userName}}, please login</h3>
   </mat-card>

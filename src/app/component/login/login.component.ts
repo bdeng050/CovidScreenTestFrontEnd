@@ -46,6 +46,7 @@ export class LoginComponent {
   }
   onlogout(){
     localStorage.setItem('loginInfo', 'false');
+    
   }
 
   async onSubmit(): Promise<void> {

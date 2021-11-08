@@ -18,7 +18,8 @@ export class ProfileComponent implements OnInit {
   loginService: LoginService
   user: string
   infoData: string
-  id:number
+  id:any
+  token:any
 
   constructor(loginService: LoginService) {
     this.loginService=loginService
@@ -29,6 +30,15 @@ export class ProfileComponent implements OnInit {
    
 
   ngOnInit(): void {
+    this.token = JSON.parse(localStorage.getItem('loginInfo') || '{}')
+    console.log('loginToken',this.token)
+    if(!this.token){
+      console.log('fail')
+      this.id='please go login'
+      this.user='please go login'
+      this.infoData='please go login'
+    }
+    else{
     this.user = localStorage.getItem('user')||'{}'
     console.log(this.user)
     this.loginService.getAllPerson().subscribe(Person=> {
@@ -55,6 +65,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     console.log(this.infoData)
+  }
   }
 
 }

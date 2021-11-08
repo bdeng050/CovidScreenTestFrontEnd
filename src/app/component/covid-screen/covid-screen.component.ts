@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 // import { features } from 'process';
@@ -23,6 +24,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 export class CovidScreenComponent implements OnInit { 
   cough: string = 'no';
   fever: string = 'no';
+  other: string= 'no'
   data: covidData[]=[];
   persons: User[]=[];
   covidForm: FormGroup;
@@ -44,7 +46,7 @@ export class CovidScreenComponent implements OnInit {
   ngOnInit(): void {
     this.token = JSON.parse(localStorage.getItem('loginInfo') || '{}')
     console.log('loginToken',this.token)
-    if(this.token!=='true'){
+    if(!this.token){
       console.log('fail')
       // this.router.navigate(['dont/'])
     }

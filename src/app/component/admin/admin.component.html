@@ -1,7 +1,7 @@
 <h2>Admin Page</h2>
 <div>
-<ul>
-    <li *ngFor="let person of persons">
+<!-- <ul>
+    <li *ngFor="let person of dataSource">
         <span class="badge">{{person.userName}}</span>
         <span class="badge"><pre></pre></span>
         <span class="badge">ID={{person.id}}</span>
@@ -11,9 +11,60 @@
         <span class="badge">{{person.info}}</span>
         <span class="badge"><pre></pre></span>
     </li>
-</ul>
+</ul> -->
+<!-- <table mat-table class="mat-elevation-z8">
+  <thead>
+    <tr>
+      <th>q</th>
+      <th>w</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table> -->
+<table mat-table [dataSource]="persons" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="userName">
+    <th mat-header-cell *matHeaderCellDef> UserName </th>
+    <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="passWord">
+    <th mat-header-cell *matHeaderCellDef> PassWord </th>
+    <td mat-cell *matCellDef="let element"> {{element.passWord}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="hasCovid">
+    <th mat-header-cell *matHeaderCellDef> Covid Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.hasCovid}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="info">
+    <th mat-header-cell *matHeaderCellDef> Form Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.info}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> User ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
 </div>
-<button (click)="onClickMe()">Update</button>
+<br>
+<br>
+<button (click)="onClickMe()" mat-flat-button color="warn">Edit DataBase</button>
+<!-- <button (click)="onClickMe()">Update</button> -->
 <mat-card>
     <mat-card-content>
       <form *ngIf="ifupdate" [formGroup]="updateForm" (ngSubmit)="onSubmit()">
@@ -31,15 +82,15 @@
             <input matInput placeholder="newPassWord" formControlName="newPassWord" required>
             
           </mat-form-field>
-        <button mat-raised-button color="primary">UPDATE</button>
+        <button mat-raised-button color="primary">UPDATE UserName or PassWord</button>
       </form>
-    </mat-card-content>
-    <mat-card-content>
-      <form *ngIf="ifupdate">
+      <form *ngIf="ifupdate" [formGroup]="updateForm2" (ngSubmit)="onSubmit()">
+  
+        
         <mat-form-field class="full-width-input">
-          <input matInput placeholder="Old ID" formControlName="oldId" required>
-         
-        </mat-form-field>
+          <input matInput placeholder="Old ID" formControlName="oldId" required>            
+          </mat-form-field>
+        <button mat-raised-button color="primary">UPDATE UserName or PassWord</button>
       </form>
     </mat-card-content>
   </mat-card>
