@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
 import {User} from "../../model/User";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../service/loginService";
 import {Router} from "@angular/router";
 import { ActivatedRoute } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +30,7 @@ export class LoginComponent {
   userName: string;
   
 
-  constructor(private fb: FormBuilder,loginService: LoginService, private router: Router,private activateInfo: ActivatedRoute) {
+  constructor(private fb: FormBuilder,loginService: LoginService, private router: Router,private activateInfo: ActivatedRoute,public dialog: MatDialog,private toastr: ToastrService) {
     this.screenURL = 'test'
     this.userName=''
     this.loginService = loginService
@@ -46,10 +49,22 @@ export class LoginComponent {
   }
   onlogout(){
     localStorage.setItem('loginInfo', 'false');
+    this.openDialog()
     
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExample);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  showSuccess() {
+    this.toastr.success('Log in Success');
   }
 
   async onSubmit(): Promise<void> {
+    this.showSuccess()
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.loginForm.valid) {
@@ -61,9 +76,12 @@ export class LoginComponent {
             if(i.userName==username){
               console.log(i)
               if(i.info){
+                // this.showToaster()
+                
                 this.router.navigate(['profile/'])
               }
               if(i.hasCovid){
+  
                 this.router.navigate(['dont/'])
               }
             }
@@ -73,11 +91,13 @@ export class LoginComponent {
           if(login){
             this.loginInvalid = true;
             console.log("success");
+    
             this.router.navigate(['admin/'])
           }
           else{
             localStorage.setItem('loginInfo','true');
             localStorage.setItem('user',username);
+        
             this.router.navigate(['covid/'],{  
               queryParams: {  
               name: username  
@@ -90,4 +110,6 @@ export class LoginComponent {
       }
     }
   }     
+      }
+      export class DialogContentExample {
       }

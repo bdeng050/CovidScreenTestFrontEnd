@@ -50,7 +50,10 @@ import { DontComeToWorkComponent } from './component/dont-come-to-work/dont-come
 // import { en_US } from 'ng-zorro-antd/i18n';
 import en from '@angular/common/locales/en';
 import { ProfileComponent } from './component/profile/profile.component';
-
+import { ToastrService } from 'ngx-toastr';
+import { MatDialogModule } from '@angular/material/dialog';
+import {PlzComponent} from './component/plz/plz.component';
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(en);
 
@@ -67,6 +70,7 @@ registerLocaleData(en);
     CovidScreenComponent,
     DontComeToWorkComponent,
     ProfileComponent,
+    PlzComponent,
 
   ],
   imports: [
@@ -108,7 +112,14 @@ registerLocaleData(en);
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    ToastrModule.forRoot({
+      progressBar:true,
+      timeOut:2500,
+      positionClass: 'toast-top-left'
+    }),
   ],
   exports:[
     CommonModule,

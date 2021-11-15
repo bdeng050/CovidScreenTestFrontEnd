@@ -84,13 +84,11 @@
           </mat-form-field>
         <button mat-raised-button color="primary">UPDATE UserName or PassWord</button>
       </form>
-      <form *ngIf="ifupdate" [formGroup]="updateForm2" (ngSubmit)="onSubmit()">
-  
-        
+      <form *ngIf="ifupdate" [formGroup]="updateForm2" (ngSubmit)="onSubmit2()"> 
         <mat-form-field class="full-width-input">
           <input matInput placeholder="Old ID" formControlName="oldId" required>            
           </mat-form-field>
-        <button mat-raised-button color="primary">UPDATE UserName or PassWord</button>
+        <button mat-raised-button color="primary">UPDATE Covid Status</button>
       </form>
     </mat-card-content>
   </mat-card>

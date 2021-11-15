@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ToastrService } from 'ngx-toastr';
 
 
 // import { features } from 'process';
@@ -32,7 +33,7 @@ export class CovidScreenComponent implements OnInit {
   hasCovid= false;
   userName: string;
   token:string
-  constructor(private fb: FormBuilder, loginService: LoginService, private router: Router,private activateInfo: ActivatedRoute) {
+  constructor(private fb: FormBuilder, loginService: LoginService, private router: Router,private activateInfo: ActivatedRoute,private toastr: ToastrService) {
     //this.person=person;
     this.userName="";
     this.loginService = loginService;
@@ -48,7 +49,7 @@ export class CovidScreenComponent implements OnInit {
     console.log('loginToken',this.token)
     if(!this.token){
       console.log('fail')
-      // this.router.navigate(['dont/'])
+      this.router.navigate(['plz/'])
     }
     this.activateInfo.queryParams.subscribe(params =>{  
       this.userName=params.name 
@@ -65,6 +66,7 @@ export class CovidScreenComponent implements OnInit {
     return false
   }
    onSubmit(): void {
+    this.toastr.success('Submit your status successfully');
     try{
       const name= this.covidForm.get('name')?.value;
       this.loginService.getAllPerson().subscribe(Person=> {
@@ -81,6 +83,8 @@ export class CovidScreenComponent implements OnInit {
           this.router.navigate(['dont/'])
           }
           else{
+            this.loginService.deletePerson(i.id).subscribe(result=>{console.log(result);});
+            this.loginService.registration(new User(i.userName, i.passWord,false,true)).subscribe(result=>{console.log(result);});
             this.router.navigate(['profile/'])
           }
           // const fever= this.covidForm.get('fever')?.value;

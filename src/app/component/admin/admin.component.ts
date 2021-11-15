@@ -73,4 +73,15 @@ export class AdminComponent implements OnInit {
     // this.loginService.deletePerson(old).subscribe(result=>{console.log(result);});
    // this.loginService.registration(new User(newU,newP,false,false)).subscribe(result=>{console.log(result);}); 
 }
+onSubmit2(): void{
+  const old = this.updateForm2.get('oldId')?.value;
+  this.loginService.getAllPerson().subscribe(persons=>{
+    for(let i of persons){
+      if(i.id==old){
+        this.loginService.deletePerson(old).subscribe(result=>{console.log(result);});
+        this.loginService.registration(new User(i.userName,i.passWord,!i.hasCovid,i.info)).subscribe(result=>{console.log(result)})        
+      }
+    }
+  })
+}
 }

@@ -3,7 +3,7 @@ import {User} from "../model/User";
 //import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { LoginService } from '../service/loginService';
-
+import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class RegisterComponent {
   submitted = false;
   formSubmitAttempt = false;
   loginService: LoginService
-  constructor(private fb: FormBuilder,loginService: LoginService, private router: Router ) {
+  constructor(private fb: FormBuilder,loginService: LoginService, private router: Router ,private toastr: ToastrService) {
     this.loginService = loginService
     this.loginForm = this.fb.group({
       username: ['',Validators.required],
@@ -26,6 +26,7 @@ export class RegisterComponent {
   }
 //TODO： 如果注册成功跳转到login页面并在页面显示注册人的名字
   async onSubmit(): Promise<void> {
+    this.toastr.success('Register Success!');
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.loginForm.valid) {
